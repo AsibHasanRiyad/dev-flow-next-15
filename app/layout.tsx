@@ -1,16 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono as GeistMono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import React from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/InterVF.ttf",
+  variable: "--font-inter",
+  display: "swap",
+  // weight: "100  800",
 });
-
-const geistMono = GeistMono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const josefin = localFont({
+  src: "./fonts/josefinSans.ttf",
+  variable: "--font-josefin",
+  weight: "100  800",
+  display: "swap",
+});
+const asimovian = localFont({
+  src: "./fonts/Asimovian-Regular.ttf",
+  variable: "--font-asimovian",
+  weight: "100  800",
+  display: "swap",
+});
+const karla = localFont({
+  src: "./fonts/Karla.ttf",
+  variable: "--font-karla",
+  weight: "100  800",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${josefin.variable} ${asimovian.variable} ${karla.variable}  antialiased`}
       >
         {children}
       </body>
