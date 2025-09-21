@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+// eslint-disable-next-line import/order
 import localFont from "next/font/local";
+
 import "./globals.css";
 
-import Navbar from "@/components/navigation/navbar";
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
+
+import { auth } from "@/auth";
 
 import ThemeProvider from "../context/Theme";
 
@@ -36,26 +41,31 @@ export const metadata: Metadata = {
   description: "A cheaper version of Stack Overflow",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
-    <html suppressHydrationWarning lang="en">
-      <body
-        className={`${inter.variable} ${josefin.variable} ${asimovian.variable} ${karla.variable}  antialiased`}
-      >
-        <ThemeProvider
-          attribute={"class"}
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
+    <html
+      suppressHydrationWarning
+      className={`${inter.variable} ${josefin.variable} ${asimovian.variable} ${karla.variable}  antialiased`}
+      lang="en"
+    >
+      <SessionProvider session={session}>
+        <body>
+          <ThemeProvider
+            attribute={"class"}
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+          <Toaster />
+        </body>
+      </SessionProvider>
     </html>
   );
 }
