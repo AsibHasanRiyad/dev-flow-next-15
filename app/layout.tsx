@@ -53,6 +53,13 @@ export default async function RootLayout({
       className={`${inter.variable} ${josefin.variable} ${asimovian.variable} ${karla.variable}  antialiased`}
       lang="en"
     >
+      <head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+      </head>
       <SessionProvider session={session}>
         <body>
           <ThemeProvider
